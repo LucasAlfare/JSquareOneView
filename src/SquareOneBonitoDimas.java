@@ -11,6 +11,9 @@ import java.util.Arrays;
  */
 public class SquareOneBonitoDimas extends JComponent {
 
+    private static final double L = 60;
+    private static final double TAN15 = 0.2679491924;
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -49,16 +52,16 @@ public class SquareOneBonitoDimas extends JComponent {
     private Path2D canto(int x, int y){
         Double valoresX[] = {
                 x * 1.0,
-                x - ((100 - (100 * 0.2679491924)) / Math.sqrt(8)),
+                x - ((L - (L * TAN15)) / Math.sqrt(8)),
                 x * 1.0,
-                x + ((100 - (100 * 0.2679491924)) / Math.sqrt(8)),
+                x + ((L - (L * TAN15)) / Math.sqrt(8)),
         };
 
         Double valoresY[] = {
                 y * 1.0,
-                y - ((100 * Math.sqrt(2)) / 2) + ((100 - (100 * 0.2679491924)) / Math.sqrt(8)),
-                y - ((100 * Math.sqrt(2)) / 2),
-                y - ((100 * Math.sqrt(2)) / 2) + ((100 - (100 * 0.2679491924)) / Math.sqrt(8)),
+                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
+                y - ((L * Math.sqrt(2)) / 2),
+                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
         };
 
         Path2D path = new Path2D.Double();
@@ -75,14 +78,14 @@ public class SquareOneBonitoDimas extends JComponent {
     private Path2D meio(int x, int y){
         Double valoresX[] = {
                 x * 1.0,
-                x - ((100 * 0.2679491924) / 2),
-                x + ((100 * 0.2679491924) / 2)
+                x - ((L * TAN15) / 2),
+                x + ((L * TAN15) / 2)
         };
 
         Double valoresY[] = {
                 y * 1.0,
-                y - (100 / 2) * 1.0,
-                y - (100 / 2) * 1.0
+                y - (L / 2) * 1.0,
+                y - (L / 2) * 1.0
         };
 
         Path2D path = new Path2D.Double();
