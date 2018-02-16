@@ -59,14 +59,14 @@ public class SquareOneBonitoDimas extends JComponent {
                 (double) x,
                 x - ((L - (L * TAN15)) / Math.sqrt(8)),
                 (double) x,
-                x + ((L - (L * TAN15)) / Math.sqrt(8)),
+                x + ((L - (L * TAN15)) / Math.sqrt(8))
         };
 
         Double valoresY[] = {
                 (double) y,
                 y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
                 y - ((L * Math.sqrt(2)) / 2),
-                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
+                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8))
         };
 
         Path2D path = new Path2D.Double();
@@ -89,8 +89,8 @@ public class SquareOneBonitoDimas extends JComponent {
 
         Double valoresY[] = {
                 (double) y,
-                y - (L / 2) * 1.0,
-                y - (L / 2) * 1.0
+                y - (L / 2),
+                y - (L / 2)
         };
 
         Path2D path = new Path2D.Double();
@@ -105,13 +105,13 @@ public class SquareOneBonitoDimas extends JComponent {
     }
 
     private boolean isMeio(Path2D path){
-        int points = 0;
+        int numVertices = 0;
         for (PathIterator i = path.getPathIterator(null); !i.isDone(); i.next()){
             if (i.currentSegment(new double[6]) == PathIterator.SEG_LINETO){
-                points++;
+                numVertices++;
             }
         }
 
-        return points + 1 == 3;
+        return numVertices + 1 == 3;
     }
 }
