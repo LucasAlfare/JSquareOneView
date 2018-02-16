@@ -35,15 +35,19 @@ public class SquareOneBonitoDimas extends JComponent {
                 canto(300, 300)));
         Collections.shuffle(pieces);
 
-        boolean isEdge = isMeio(pieces.get(0));
-        for (Path2D polygon : pieces){
-            g2d.rotate(Math.toRadians(isEdge && isMeio(polygon) ? 30 : (!isEdge && !isMeio(polygon) ? 60 : 45)), 300, 300);
-            isEdge = isMeio(polygon);
+        boolean previousIsMeio = isMeio(pieces.get(0));
+        for (Path2D currPeca : pieces){
+            g2d.rotate(
+                    Math.toRadians(
+                    previousIsMeio && isMeio(currPeca) ? 30 : (!previousIsMeio && !isMeio(currPeca) ? 60 : 45)),
+                    300,
+                    300);
+            previousIsMeio = isMeio(currPeca);
 
             g2d.setColor(Color.green);
-            g2d.fill(polygon);
+            g2d.fill(currPeca);
             g2d.setColor(Color.black);
-            g2d.draw(polygon);
+            g2d.draw(currPeca);
         }
 
         //g2d.setTransform(old);//restaura a rotação original
