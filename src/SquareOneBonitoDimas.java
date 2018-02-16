@@ -18,7 +18,7 @@ public class SquareOneBonitoDimas extends JComponent {
         Graphics2D g2d = (Graphics2D) g;
         //AffineTransform old = g2d.getTransform();
 
-        //g2d.rotate(Math.toRadians(-30), 300, 300);
+        g2d.rotate(Math.toRadians(-30), 300, 300);
 
         ArrayList<Path2D> pieces = new ArrayList<>(Arrays.asList(
                 meio(300, 300),
