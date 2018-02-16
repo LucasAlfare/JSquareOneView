@@ -4,6 +4,7 @@ import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * ESSA CLASSE É BOA MESMO, AGRADICMENTOS AO MEU PRIMOR EUDES QUE
@@ -12,7 +13,7 @@ import java.util.Arrays;
 public class SquareOneBonitoDimas extends JComponent {
 
     private static final double L = 60;
-    private static final double TAN15 = 0.2679491924;
+    private static final double TAN15 = Math.tan(Math.toRadians(15));
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -32,7 +33,7 @@ public class SquareOneBonitoDimas extends JComponent {
                 canto(300, 300),
                 meio(300, 300),
                 canto(300, 300)));
-        //Collections.shuffle(pieces);
+        Collections.shuffle(pieces);
 
         boolean isEdge = isMeio(pieces.get(0));
         for (Path2D polygon : pieces){
@@ -51,14 +52,14 @@ public class SquareOneBonitoDimas extends JComponent {
 
     private Path2D canto(int x, int y){
         Double valoresX[] = {
-                x * 1.0,
+                (double) x,
                 x - ((L - (L * TAN15)) / Math.sqrt(8)),
-                x * 1.0,
+                (double) x,
                 x + ((L - (L * TAN15)) / Math.sqrt(8)),
         };
 
         Double valoresY[] = {
-                y * 1.0,
+                (double) y,
                 y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
                 y - ((L * Math.sqrt(2)) / 2),
                 y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
@@ -77,13 +78,13 @@ public class SquareOneBonitoDimas extends JComponent {
 
     private Path2D meio(int x, int y){
         Double valoresX[] = {
-                x * 1.0,
+                (double) x,
                 x - ((L * TAN15) / 2),
                 x + ((L * TAN15) / 2)
         };
 
         Double valoresY[] = {
-                y * 1.0,
+                (double) y,
                 y - (L / 2) * 1.0,
                 y - (L / 2) * 1.0
         };
