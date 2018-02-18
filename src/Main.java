@@ -9,9 +9,9 @@ public class Main extends JFrame{
     public Main(){
         setSize(800, 800);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(3);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        SquareOneBonitoDimas squareOneBonitoDimas = new SquareOneBonitoDimas(new SquareOne("(0, 2)/(-2, 1)/(0, 3)/(-3, -3)/(0, -3)/(0, -3)/(-1, 0)/(0, -3)/(-2, -1)/(6, -2)/(6, 0)/(0, -5)"));
+        SquareOneBonitoDimas squareOneBonitoDimas = new SquareOneBonitoDimas(new SquareOne("(0, -1)/(0, 3)/(-5, 1)/(3, 0)/(2, -1)/(1, -2)/(-4, 0)/(-3, -3)/(4, 0)/(6, -1)/(-3, -4)/(-4, -3)/"));
 
         this.addKeyListener(new KeyListener() {
             @Override

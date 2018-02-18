@@ -16,10 +16,22 @@ public class SquareOneBonitoDimas extends JComponent {
 
     private static final double L = 100;
     private static final double TAN15 = Math.tan(Math.toRadians(15));
-    private static final int TOP_ANCHOR_X = 300;
-    private static final int TOP_ANCHOR_Y = 300;
-    private static final int BOTTOM_ANCHOR_X = 300;
-    private static final int BOTTOM_ANCHOR_Y = TOP_ANCHOR_X + 180;
+    private static final int TOP_ANCHOR_X = 85;
+    private static final int TOP_ANCHOR_Y = 85;
+    private static final int BOTTOM_ANCHOR_X = 85;
+    private static final int BOTTOM_ANCHOR_Y = TOP_ANCHOR_X + 150;
+
+//    private static final Double[] CANTO_X = {};
+//    private static final Double[] CANTO_Y = {};
+//
+//    private static final Double[] MEIO_X = {};
+//    private static final Double[] MEIO_Y = {};
+//
+//    private static final Double[] LATERAL_MEIO_X = {};
+//    private static final Double[] LATERAL_MEIO_Y = {};
+//
+//    private static final Double[] LATERAL_CANTO_X = {};
+//    private static final Double[] LATERAL_CANTO_Y = {};
 
     private SquareOne squareOne;
     private ArrayList<Path2D[]> draws;
@@ -36,6 +48,7 @@ public class SquareOneBonitoDimas extends JComponent {
         Graphics2D g2d = (Graphics2D) g;
         AffineTransform old = g2d.getTransform();
 
+        //g2d.rotate(Math.toRadians(-75), TOP_ANCHOR_X, TOP_ANCHOR_Y);
         g2d.rotate(Math.toRadians(-30), TOP_ANCHOR_X, TOP_ANCHOR_Y);
         drawFace(g2d, TOP_ANCHOR_X, TOP_ANCHOR_Y, true);
         g2d.setTransform(old);//restaura a rotação original
@@ -50,7 +63,7 @@ public class SquareOneBonitoDimas extends JComponent {
         setupDraws(face, anchorX, anchorY);
 
         AffineTransform old = g2d.getTransform();
-        //g2d.rotate(Math.toRadians(face ? -30 : 0), anchorX, anchorY);
+        //g2d.rotate(Math.toRadians(face ? -45 : 0), anchorX, anchorY);
 
         boolean prevIsMeio = isMeio(draws.get(0)[0]);
         for (int i = 0; i < draws.size(); i++) {
@@ -79,18 +92,18 @@ public class SquareOneBonitoDimas extends JComponent {
     }
 
     private Path2D canto(int x, int y){
-        Double valoresX[] = {
+        Double[] valoresX = {
                 (double) x,
-                x - ((L - (L * TAN15)) / Math.sqrt(8)),
+                x - (L * 0.2588190451),
                 (double) x,
-                x + ((L - (L * TAN15)) / Math.sqrt(8))
+                x + (L * 0.2588190451)
         };
 
-        Double valoresY[] = {
+        Double[] valoresY = {
                 (double) y,
-                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8)),
-                y - ((L * Math.sqrt(2)) / 2),
-                y - ((L * Math.sqrt(2)) / 2) + ((L - (L * TAN15)) / Math.sqrt(8))
+                y - (L * 0.4482877361),
+                y - (L * 0.7071067812),
+                y - (L * 0.4482877361)
         };
 
         Path2D path = new Path2D.Double();
@@ -105,13 +118,13 @@ public class SquareOneBonitoDimas extends JComponent {
     }
 
     private Path2D meio(int x, int y){
-        Double valoresX[] = {
+        Double[] valoresX = {
                 (double) x,
-                x - ((L * TAN15) / 2),
-                x + ((L * TAN15) / 2)
+                x - (L * 0.1339745962),
+                x + (L * 0.1339745962)
         };
 
-        Double valoresY[] = {
+        Double[] valoresY = {
                 (double) y,
                 y - (L / 2),
                 y - (L / 2)
