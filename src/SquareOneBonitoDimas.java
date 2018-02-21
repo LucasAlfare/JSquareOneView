@@ -3,6 +3,8 @@ import com.main.puzzle.SquareOne;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.geom.PathIterator;
@@ -12,33 +14,53 @@ import java.util.ArrayList;
  * ESSA CLASSE É BOA MESMO, AGRADICMENTOS AO MEU PRIMOR EUDES QUE
  * ME AJUDOU A CALCULAR OS POLÍGONOS PQ EU NÃO ENTENDO NADA DISSO.
  */
+@Deprecated
 public class SquareOneBonitoDimas extends JComponent {
 
-    private static final double L = 100;
+    private static double L = 100;
     private static final double TAN15 = Math.tan(Math.toRadians(15));
+
     private static final int TOP_ANCHOR_X = 85;
     private static final int TOP_ANCHOR_Y = 85;
     private static final int BOTTOM_ANCHOR_X = 85;
     private static final int BOTTOM_ANCHOR_Y = TOP_ANCHOR_X + 150;
 
-//    private static final Double[] CANTO_X = {};
-//    private static final Double[] CANTO_Y = {};
-//
-//    private static final Double[] MEIO_X = {};
-//    private static final Double[] MEIO_Y = {};
-//
-//    private static final Double[] LATERAL_MEIO_X = {};
-//    private static final Double[] LATERAL_MEIO_Y = {};
-//
-//    private static final Double[] LATERAL_CANTO_X = {};
-//    private static final Double[] LATERAL_CANTO_Y = {};
-
     private SquareOne squareOne;
     private ArrayList<Path2D[]> draws;
+    private ArrayList<Path2D[]> currentTopDrawed, currentBottomDrawed;
 
     public SquareOneBonitoDimas(SquareOne squareOne) {
         this.squareOne = squareOne;
         draws = new ArrayList<>();
+        currentTopDrawed = new ArrayList<>();
+        currentBottomDrawed = new ArrayList<>();
+
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
     @Override
@@ -55,14 +77,14 @@ public class SquareOneBonitoDimas extends JComponent {
 
         g2d.rotate(Math.toRadians(-30), BOTTOM_ANCHOR_X, BOTTOM_ANCHOR_Y);
         drawFace(g2d, BOTTOM_ANCHOR_X, BOTTOM_ANCHOR_Y, false);
-
+        g2d.setTransform(old);//restaura a rotação original
         //normal...
     }
 
     private void drawFace(Graphics2D g2d, int anchorX, int anchorY, boolean face){
         setupDraws(face, anchorX, anchorY);
 
-        AffineTransform old = g2d.getTransform();
+        //AffineTransform old = g2d.getTransform();
         //g2d.rotate(Math.toRadians(face ? -45 : 0), anchorX, anchorY);
 
         boolean prevIsMeio = isMeio(draws.get(0)[0]);
@@ -81,6 +103,19 @@ public class SquareOneBonitoDimas extends JComponent {
                 g2d.draw(draws.get(i)[j]);
             }
         }
+    }
+
+    private void setupDraws(boolean face, int anchorX, int anchorY) {
+        draws.clear();
+        for (Piece x : this.getSquareOne().getPieces(face)) {
+            if (x.getColors().length == 2) {
+                draws.add(meioFull(anchorX, anchorY));
+            } else {
+                draws.add(cantoFull(anchorX, anchorY));
+            }
+        }
+
+        repaint();
     }
 
     private Path2D[] cantoFull(int x, int y){
@@ -249,17 +284,18 @@ public class SquareOneBonitoDimas extends JComponent {
         }
     }
 
-    private void setupDraws(boolean face, int anchorX, int anchorY){
-        draws.clear();
-        for (Piece x : this.getSquareOne().getPieces(face)){
-            if (x.getColors().length == 2){
-                draws.add(meioFull(anchorX, anchorY));
-            } else {
-                draws.add(cantoFull(anchorX, anchorY));
+    private int clickedPath(ArrayList<Path2D[]> pieces, Point clickLocation) {
+        for (int i = 0; i < pieces.size(); i++) {
+            for (Path2D piece : pieces.get(i)) {
+                if (piece.contains(clickLocation)) {
+                    System.out.println(getSquareOne().getPieces(true).get(i));
+                    System.out.println(getSquareOne().getPieces(false).get(i));
+                    return i;
+                }
             }
         }
 
-        repaint();
+        return -1;
     }
 
     public static double getL() {
